@@ -1,10 +1,10 @@
 services:
   db:
-    image: postgres:15
+    image: postgres:18-alpine
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mydatabase
+      POSTGRES_DB: analytics
     ports:
       - "5432:5432"
     volumes:
@@ -15,12 +15,30 @@ services:
     container_name: backend
     env_file:
       - .env
-    volumes:
-      - ./apps/api/src:/app
     ports:
       - "8000:8000"
     depends_on:
-      - db
+      db:
+        condition: service_started
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    build: ./apps/web
+    container_name: frontend
+    env_file:
+      - .env
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
 
 volumes:
   pgdata:

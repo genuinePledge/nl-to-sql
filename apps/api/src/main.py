@@ -24,3 +24,8 @@ def generate(prompt: str) -> str:
 @app.get("/")
 async def root():
     return {"message": generate("Tell me what can you do?")}
+
+
+@app.get("/health")
+async def health():
+    return {"status": "healthy"}

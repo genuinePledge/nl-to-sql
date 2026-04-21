@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+.gitattributes
+.env
+.env.local
+.env.*.local
+.cache
+dist
+build
+*.tsbuildinfo
+.vscode/
+.idea/
+*.md
+LICENSE

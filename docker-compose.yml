@@ -9,6 +9,8 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./apps/api/migrations:/docker-entrypoint-initdb.d
+      - ./train.csv:/data/train.csv
 
   backend:
     build: ./apps/api
@@ -20,6 +22,8 @@ services:
     depends_on:
       db:
         condition: service_started
+    volumes:
+      - ./apps/api/src:/src
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 10s

@@ -4,3 +4,8 @@ psycopg2-binary
 sqlparse
 requests
 python-dotenv
+langchain
+langchain-community
+langgraph
+langchain-ollama
+langchain-gigachat

@@ -1,17 +1,33 @@
 import { useState, useRef, useEffect, type JSX } from "react";
 import "./styles/global.css";
 import { Bar } from "react-chartjs-2";
+import RightAnalyticsPanel from "./RightAnalyticsPanel";
+
+// app.tsx
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
+  LineElement,      // + новый
+  PointElement,     // + новый
+  ArcElement,       // + новый
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  LineElement,
+  PointElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -229,7 +245,7 @@ function App() {
             <input type="file" accept=".csv,.sql" />
             <button className="btn-secondary">Загрузить</button>
           </div>
-          <p className="upload-hint">Максимальный размер: 50 МБ</p>
+          <p className="upload-hint">Максимальный размер: 50 ГБ</p>
         </div>
       </div>
     ),
@@ -492,6 +508,9 @@ function App() {
           <div className="page-container">{pageContent[activePage]}</div>
         )}
       </main>
+<aside className="sidebar-right">
+  <RightAnalyticsPanel />
+</aside>
     </div>
   );
 }

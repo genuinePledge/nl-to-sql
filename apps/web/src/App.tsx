@@ -332,8 +332,8 @@ function App() {
 
   return (
     <div className="app-layout">
-      <div className="server-bg server-bg-left" ref={leftBgRef} />
-      <div className="server-bg server-bg-right" ref={rightBgRef} />
+      <div className="" ref={leftBgRef} />
+      <div className="" ref={rightBgRef} />
 
       <aside className="sidebar">
         <div className="sidebar-logo" onClick={() => setActivePage('home')} style={{ cursor: 'pointer' }}>

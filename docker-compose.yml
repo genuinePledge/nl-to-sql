@@ -11,6 +11,12 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./apps/api/migrations:/docker-entrypoint-initdb.d
       - ./train.csv:/data/train.csv
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d analytics"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 10s
 
   backend:
     build: ./apps/api
@@ -21,7 +27,8 @@ services:
       - "8000:8000"
     depends_on:
       db:
-        condition: service_started
+        condition: service_healthy
+        restart: true
     volumes:
       - ./apps/api/src:/src
     healthcheck:
@@ -42,7 +49,9 @@ services:
     ports:
       - "5173:5173"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+        restart: true
 
 volumes:
   pgdata:

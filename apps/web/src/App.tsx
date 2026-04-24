@@ -22,8 +22,10 @@ interface Message {
 }
 
 type Tab = "sql" | "table" | "chart";
+type PageName = "home" | "profile" | "tariff" | "upload" | "history" | "notifications" | "settings" | "feedback";
 
 function App() {
+  const [activePage, setActivePage] = useState<PageName>('home');
   const [prompt, setPrompt] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
@@ -88,15 +90,25 @@ function App() {
     }
   };
 
-  const sidebarItems = [
-    { icon: "👤", label: "Личный кабинет", action: () => alert("Личный кабинет") },
-    { icon: "💳", label: "Управление тарифом", action: () => alert("Тарифы") },
-    { icon: "📂", label: "Загрузка БД", action: () => alert("Загрузка БД") },
-    { icon: "📋", label: "Управление историей", action: () => alert("История запросов") },
-    { icon: "🔔", label: "Настройки оповещений", action: () => alert("Оповещения") },
-    { icon: "⚙️", label: "Параметры", action: () => alert("Параметры") },
-    { icon: "💬", label: "Обратная связь", action: () => alert("Обратная связь") },
-  ];
+  const sidebarItems: { icon: string; label: string; page: PageName }[] = [
+  { icon: "👤", label: "Личный кабинет",      page: "profile" },
+  { icon: "💳", label: "Управление тарифом",   page: "tariff" },
+  { icon: "📂", label: "Загрузка БД",          page: "upload" },
+  { icon: "📋", label: "Управление историей",  page: "history" },
+  { icon: "🔔", label: "Настройки оповещений", page: "notifications" },
+  { icon: "⚙️", label: "Параметры",            page: "settings" },
+  { icon: "💬", label: "Обратная связь",       page: "feedback" },
+];
+
+const pageContent = {
+  profile:       <div className="placeholder-page"><h2>👤 Личный кабинет</h2><p>Здесь будет информация профиля.</p></div>,
+  tariff:        <div className="placeholder-page"><h2>💳 Управление тарифом</h2><p>Ваши тарифы и платежи.</p></div>,
+  upload:        <div className="placeholder-page"><h2>📂 Загрузка БД</h2><p>Форма для загрузки новой базы данных.</p></div>,
+  history:       <div className="placeholder-page"><h2>📋 Управление историей</h2><p>История запросов и генераций.</p></div>,
+  notifications: <div className="placeholder-page"><h2>🔔 Настройки оповещений</h2><p>Выберите события для уведомлений.</p></div>,
+  settings:      <div className="placeholder-page"><h2>⚙️ Параметры</h2><p>Общие настройки приложения.</p></div>,
+  feedback:      <div className="placeholder-page"><h2>💬 Обратная связь</h2><p>Форма обратной связи и FAQ.</p></div>,
+};
 
   // -------- Извлечение данных из сообщений --------
   const getLastAiMessage = (): Message | undefined => {
@@ -182,25 +194,30 @@ function App() {
       <div className="server-bg server-bg-right" ref={rightBgRef} />
 
       <aside className="sidebar">
-        <div className="sidebar-logo">
-          <span className="logo-icon">🏛️</span>
-          <span className="label" style={{ opacity: 0 }}></span>
-        </div>
+        <div className="sidebar-logo" onClick={() => setActivePage('home')} style={{ cursor: 'pointer' }}>
+  <span className="logo-icon">🏛️</span>
+  <span className="label" style={{ opacity: 0 }}></span>
+</div>
         <ul className="sidebar-nav">
-          {sidebarItems.map((item, idx) => (
-            <li key={idx} className="sidebar-item" onClick={item.action}>
-              <span className="icon">{item.icon}</span>
-              <span className="label">{item.label}</span>
-            </li>
-          ))}
-        </ul>
+  {sidebarItems.map((item, idx) => (
+    <li
+      key={idx}
+      className={`sidebar-item ${activePage === item.page ? 'active' : ''}`}
+      onClick={() => setActivePage(item.page)}
+    >
+      <span className="icon">{item.icon}</span>
+      <span className="label">{item.label}</span>
+    </li>
+  ))}
+</ul>
       </aside>
 
       <main className="main-content">
         <header className="app-header">
           <h1>ИПАВБД</h1>
         </header>
-
+{activePage === 'home' ? (
+    <>
         <div className="messages-container" ref={messagesContainerRef}>
           <div className="messages-wrapper">
             {error && <div className="error-message">{error}</div>}
@@ -343,7 +360,11 @@ function App() {
             <p style={{ color: "var(--text-secondary)" }}>AI обрабатывает запрос…</p>
           </div>
         )}
-      </main>
+</>
+  ) : (
+    <div className="page-container">{pageContent[activePage]}</div>
+  )}
+</main>
     </div>
   );
 }

@@ -27,7 +27,7 @@ executing a query, rewrite the query and try again.
 DO NOT make any DML statements: {statements} to the
 database.
 
-DO NOT query the schema because they are already provided below.
+Query the schema ONLY when the metrics are unclear, the predefined ones are provided below.
 
 The semantic layer provides business-friendly definitions for tables, metrics, and dimensions:
 

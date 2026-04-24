@@ -137,6 +137,9 @@ const RightAnalyticsPanel = () => {
 
   return (
     <div className="analytics-panel-content">
+        <h3 style={{ margin: 0, fontSize: '1rem', fontWeight: 600, color: 'var(--text-primary)' }}>
+    📊 Аналитика БД
+  </h3>
       {loading ? (
         <div className="analytics-placeholder">Загрузка данных…</div>
       ) : rawData.length === 0 ? (

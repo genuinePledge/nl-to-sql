@@ -869,3 +869,164 @@ body::after {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
+
+/* ========== ПРАВАЯ АНАЛИТИЧЕСКАЯ ПАНЕЛЬ ========== */
+.sidebar-right {
+  width: var(--sidebar-collapsed);          /* 64px в свёрнутом виде, как левая */
+  background: var(--bg-surface);
+  border-left: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
+  overflow: hidden;
+  white-space: nowrap;
+  z-index: 20;
+  box-shadow: var(--shadow-sm);
+  flex-shrink: 0;
+  position: relative;                      /* для иконки-указателя */
+}
+
+.sidebar-right:hover {
+  width: 420px;                            /* раскрытая ширина */
+  box-shadow: var(--shadow-lg);
+}
+
+/* Иконка-подсказка в свёрнутом состоянии (аналог логотипа левой панели) */
+.sidebar-right::before {
+  content: "📊";
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 28px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+.sidebar-right:hover::before {
+  opacity: 0;
+}
+
+/* Контейнер для всего содержимого панели */
+.analytics-panel-content {
+  padding: 20px 16px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  opacity: 0;
+  transition: opacity 0.25s 0.1s;
+  overflow-y: auto;
+  /* Скрываем полосу прокрутки визуально, если не нужна (опционально) */
+  scrollbar-width: thin;
+}
+.sidebar-right:hover .analytics-panel-content {
+  opacity: 1;
+}
+
+/* Заглушка загрузки / нет данных */
+.analytics-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Большая диаграмма */
+.chart-large {
+  flex: 0 0 auto;
+  height: 260px;
+  margin-bottom: 0.5rem;
+}
+
+/* Блок настроек */
+.analytics-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Группа настроек */
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.setting-group label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Селекты и ползунок – под стиль приложения */
+.setting-group select,
+.setting-group input[type="range"] {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.setting-group select:focus,
+.setting-group input[type="range"]:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Кнопки выбора типа графика – стилизованы под btn-secondary */
+.chart-type-btns {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn-chart-type {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-secondary);
+}
+.btn-chart-type:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+.btn-chart-type.active {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Переключатель «Логарифмическая шкала» */
+.analytics-settings .switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+.analytics-settings .switch input[type="checkbox"] {
+  width: 1.1rem;
+  height: 1.1rem;
+  accent-color: var(--accent);
+}

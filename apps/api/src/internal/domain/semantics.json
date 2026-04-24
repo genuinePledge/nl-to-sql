@@ -1,0 +1,179 @@
+{
+  "tables": [
+    {
+      "name": "ride_events",
+      "grain": "tender",
+      "description": "One row per tender attempt; one order can have multiple tender rows.",
+      "primary_keys": ["tender_id"],
+      "business_keys": ["order_id"],
+      "dimensions": [
+        "city_id",
+        "order_id",
+        "tender_id",
+        "user_id",
+        "driver_id",
+        "status_order",
+        "status_tender",
+        "order_timestamp",
+        "tender_timestamp",
+        "driveraccept_timestamp",
+        "driverarrived_timestamp",
+        "driverstarttheride_timestamp",
+        "driverdone_timestamp",
+        "clientcancel_timestamp",
+        "drivercancel_timestamp",
+        "order_modified_local",
+        "cancel_before_accept_local",
+        "distance_in_meters",
+        "duration_in_seconds",
+        "price_order_local",
+        "price_tender_local",
+        "price_start_local"
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "business_name": "Количество заказов",
+      "canonical_name": "order_count",
+      "synonyms": ["заказы", "число заказов", "количество поездок"],
+      "grain": "order",
+      "sql_mapping": {
+        "aggregation": "COUNT_DISTINCT",
+        "field": "order_id"
+      },
+      "format": "number"
+    },
+    {
+      "business_name": "Количество тендеров",
+      "canonical_name": "tender_count",
+      "synonyms": ["тендеры", "предложения", "ставки"],
+      "grain": "tender",
+      "sql_mapping": {
+        "aggregation": "COUNT_DISTINCT",
+        "field": "tender_id"
+      },
+      "format": "number"
+    },
+    {
+      "business_name": "Доля успешных тендеров",
+      "canonical_name": "tender_success_rate",
+      "synonyms": ["конверсия тендера", "успешность тендера"],
+      "grain": "tender",
+      "sql_mapping": {
+        "formula": "COUNT_IF(status_tender = 'done') / COUNT_DISTINCT(tender_id)"
+      },
+      "format": "percentage"
+    },
+    {
+      "business_name": "Средняя цена заказа",
+      "canonical_name": "avg_order_price",
+      "synonyms": ["средний чек", "средняя стоимость заказа"],
+      "grain": "order",
+      "sql_mapping": {
+        "aggregation": "AVG",
+        "field": "price_order_local"
+      },
+      "format": "money"
+    },
+    {
+      "business_name": "Средняя дистанция",
+      "canonical_name": "avg_distance",
+      "synonyms": ["средний пробег", "среднее расстояние"],
+      "grain": "order",
+      "sql_mapping": {
+        "aggregation": "AVG",
+        "field": "distance_in_meters"
+      },
+      "format": "distance"
+    },
+    {
+      "business_name": "Отказы",
+      "canonical_name": "cancellations",
+      "synonyms": ["отмены", "отказы"],
+      "grain": "order",
+      "sql_mapping": {
+        "aggregation": "COUNT_DISTINCT",
+        "field": "order_id"
+      },
+      "format": "number"
+    },
+    {
+      "business_name": "Средняя продолжительность поездки",
+      "canonical_name": "avg_duration",
+      "synonyms": [
+        "среднее время поездки",
+        "средняя длительность",
+        "средняя продолжительность",
+        "среднее время в пути"
+      ],
+      "grain": "order",
+      "sql_mapping": {
+        "aggregation": "AVG",
+        "field": "duration_in_seconds"
+      },
+      "format": "duration"
+    },
+    {
+      "business_name": "Среднее время до принятия",
+      "canonical_name": "avg_time_to_accept",
+      "synonyms": [
+        "среднее время до принятия",
+        "среднее время ответа водителя"
+      ],
+      "grain": "tender",
+      "sql_mapping": {
+        "formula": "AVG(TIMESTAMP_DIFF(driveraccept_timestamp, tender_timestamp, SECOND))"
+      },
+      "format": "duration"
+    }
+  ],
+  "dimensions": [
+    {
+      "business_name": "Город",
+      "canonical_name": "city_id",
+      "synonyms": ["город", "город заказа"],
+      "sql_mapping": {
+        "field": "city_id"
+      },
+      "format": "integer"
+    },
+    {
+      "business_name": "Дата заказа",
+      "canonical_name": "order_date",
+      "synonyms": ["дата", "по дням", "по датам"],
+      "sql_mapping": {
+        "field": "order_timestamp",
+        "transform": "DATE"
+      },
+      "format": "date"
+    },
+    {
+      "business_name": "Статус заказа",
+      "canonical_name": "status_order",
+      "synonyms": ["успешные заказы", "отмененные заказы"],
+      "sql_mapping": {
+        "field": "status_order"
+      },
+      "allowed_values": ["done", "cancel"],
+      "format": "enum"
+    },
+    {
+      "business_name": "Статус тендера",
+      "canonical_name": "status_tender",
+      "synonyms": ["принят", "отклонен", "отменен"],
+      "sql_mapping": {
+        "field": "status_tender"
+      },
+      "allowed_values": ["done", "decline", "cancel"],
+      "format": "enum"
+    }
+  ],
+  "joins": [],
+  "notes": [
+    "Use order_id for order-level aggregation.",
+    "Use tender_id for tender-level aggregation.",
+    "Avoid COUNT(*) when the business question refers to orders, because one order may have multiple tender rows.",
+    "Treat timestamps as lifecycle events; they can support funnel metrics and time-to-accept calculations."
+  ]
+}

@@ -579,3 +579,293 @@ body::after {
   color: var(--text-secondary);
   font-size: 1rem;
 }
+
+/* ========== СТРАНИЦА ПРОФИЛЯ ========== */
+.profile-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  max-width: 400px;
+  width: 100%;
+}
+
+.profile-avatar {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.profile-email {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.profile-actions .btn-secondary {
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-danger {
+  color: #DC2626;
+  border-color: #FECACA;
+  background: #FEF2F2;
+}
+
+.btn-danger:hover {
+  background: #FEE2E2;
+  color: #B91C1C;
+  border-color: #FCA5A5;
+}
+
+/* ========== ТАРИФ ========== */
+.tariff-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tariff-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  max-width: 480px;
+  width: 100%;
+}
+
+.tariff-current {
+  margin: 1.5rem 0;
+  font-size: 1.1rem;
+}
+
+.tariff-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* ========== ЗАГРУЗКА БД ========== */
+.upload-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  max-width: 480px;
+  width: 100%;
+}
+
+.upload-area {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+
+.upload-hint {
+  color: var(--text-tertiary);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+/* ========== ИСТОРИЯ ЗАПРОСОВ ========== */
+.history-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.history-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  max-width: 600px;
+  width: 100%;
+}
+
+.history-list {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.btn-sm {
+  padding: 4px 12px;
+  font-size: 0.8rem;
+}
+
+/* ========== НАСТРОЙКИ ОПОВЕЩЕНИЙ ========== */
+.notifications-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notifications-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  max-width: 500px;
+  width: 100%;
+}
+
+.notifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.switch input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--accent);
+}
+
+/* ========== ПАРАМЕТРЫ ========== */
+.settings-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  max-width: 480px;
+  width: 100%;
+}
+
+.settings-group {
+  margin-bottom: 1.5rem;
+}
+
+.settings-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.settings-group select {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+}
+
+/* ========== ОБРАТНАЯ СВЯЗЬ ========== */
+.feedback-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  max-width: 520px;
+  width: 100%;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  resize: vertical;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}

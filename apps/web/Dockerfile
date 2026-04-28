@@ -1,9 +1,10 @@
-FROM node:25-slim
+FROM node:24-slim
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package.json pnpm-lock.yaml* ./
+RUN corepack enable pnpm
+RUN pnpm i
 
 COPY . .
 

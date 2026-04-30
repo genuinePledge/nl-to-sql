@@ -66,7 +66,10 @@ function ToolFallbackRoot({
       open={isOpen}
       onOpenChange={handleOpenChange}
       className={cn(
-        "aui-tool-fallback-root group/tool-fallback-root w-full rounded-lg border py-3",
+        `
+          aui-tool-fallback-root group/tool-fallback-root w-full rounded-lg
+          border py-3
+        `,
         className,
       )}
       style={
@@ -111,7 +114,10 @@ function ToolFallbackTrigger({
     <CollapsibleTrigger
       data-slot="tool-fallback-trigger"
       className={cn(
-        "aui-tool-fallback-trigger group/trigger flex w-full items-center gap-2 px-4 text-sm transition-colors",
+        `
+          aui-tool-fallback-trigger group/trigger flex w-full items-center gap-2
+          px-4 text-sm transition-colors
+        `,
         className,
       )}
       {...props}
@@ -127,7 +133,10 @@ function ToolFallbackTrigger({
       <span
         data-slot="tool-fallback-trigger-label"
         className={cn(
-          "aui-tool-fallback-trigger-label-wrapper relative inline-block grow text-start leading-none",
+          `
+            aui-tool-fallback-trigger-label-wrapper relative inline-block grow
+            text-start leading-none
+          `,
           isCancelled && "text-muted-foreground line-through",
         )}
       >
@@ -138,7 +147,11 @@ function ToolFallbackTrigger({
           <span
             aria-hidden
             data-slot="tool-fallback-trigger-shimmer"
-            className="aui-tool-fallback-trigger-shimmer shimmer pointer-events-none absolute inset-0 motion-reduce:animate-none"
+            className="
+              aui-tool-fallback-trigger-shimmer pointer-events-none absolute
+              inset-0 shimmer
+              motion-reduce:animate-none
+            "
           >
             {label}: <b>{toolName}</b>
           </span>
@@ -166,7 +179,10 @@ function ToolFallbackContent({
     <CollapsibleContent
       data-slot="tool-fallback-content"
       className={cn(
-        "aui-tool-fallback-content relative overflow-hidden text-sm outline-none",
+        `
+          aui-tool-fallback-content relative overflow-hidden text-sm
+          outline-none
+        `,
         "group/collapsible-content ease-out",
         "data-[state=closed]:animate-collapsible-up",
         "data-[state=open]:animate-collapsible-down",
@@ -258,7 +274,11 @@ function ToolFallbackError({
       className={cn("aui-tool-fallback-error px-4", className)}
       {...props}
     >
-      <p className="aui-tool-fallback-error-header font-semibold text-muted-foreground">
+      <p
+        className="
+          aui-tool-fallback-error-header font-semibold text-muted-foreground
+        "
+      >
         {headerText}
       </p>
       <p className="aui-tool-fallback-error-reason text-muted-foreground">

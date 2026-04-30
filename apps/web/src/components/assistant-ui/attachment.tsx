@@ -30,6 +30,7 @@ const useFileSrc = (file: File | undefined) => {
 
   useEffect(() => {
     if (!file) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSrc(undefined);
       return;
     }
@@ -71,7 +72,7 @@ const AttachmentPreview: FC<AttachmentPreviewProps> = ({ src }) => {
       src={src}
       alt="Attachment preview"
       className={cn(
-        "block h-auto max-h-[80vh] w-auto max-w-full object-contain",
+        "block size-auto max-h-[80vh] max-w-full object-contain",
         isLoaded
           ? "aui-attachment-preview-image-loaded"
           : "aui-attachment-preview-image-loading invisible",
@@ -89,16 +90,33 @@ const AttachmentPreviewDialog: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Dialog>
       <DialogTrigger
-        className="aui-attachment-preview-trigger cursor-pointer transition-colors hover:bg-accent/50"
+        className="
+          aui-attachment-preview-trigger cursor-pointer transition-colors
+          hover:bg-accent/50
+        "
         asChild
       >
         {children}
       </DialogTrigger>
-      <DialogContent className="aui-attachment-preview-dialog-content p-2 sm:max-w-3xl [&>button]:rounded-full [&>button]:bg-foreground/60 [&>button]:p-1 [&>button]:opacity-100 [&>button]:ring-0! [&_svg]:text-background [&>button]:hover:[&_svg]:text-destructive">
+      <DialogContent
+        className="
+          aui-attachment-preview-dialog-content p-2
+          sm:max-w-3xl
+          [&_svg]:text-background
+          [&>button]:rounded-full [&>button]:bg-foreground/60 [&>button]:p-1
+          [&>button]:opacity-100 [&>button]:ring-0!
+          [&>button]:hover:[&_svg]:text-destructive
+        "
+      >
         <DialogTitle className="aui-sr-only sr-only">
           Image Attachment Preview
         </DialogTitle>
-        <div className="aui-attachment-preview relative mx-auto flex max-h-[80dvh] w-full items-center justify-center overflow-hidden bg-background">
+        <div
+          className="
+            aui-attachment-preview relative mx-auto flex max-h-[80dvh] w-full
+            items-center justify-center overflow-hidden bg-background
+          "
+        >
           <AttachmentPreview src={src} />
         </div>
       </DialogContent>
@@ -110,14 +128,18 @@ const AttachmentThumb: FC = () => {
   const src = useAttachmentSrc();
 
   return (
-    <Avatar className="aui-attachment-tile-avatar h-full w-full rounded-none">
+    <Avatar className="aui-attachment-tile-avatar size-full rounded-none">
       <AvatarImage
         src={src}
         alt="Attachment preview"
         className="aui-attachment-tile-image object-cover"
       />
       <AvatarFallback>
-        <FileText className="aui-attachment-tile-fallback-icon size-8 text-muted-foreground" />
+        <FileText
+          className="
+            aui-attachment-tile-fallback-icon size-8 text-muted-foreground
+          "
+        />
       </AvatarFallback>
     </Avatar>
   );
@@ -147,13 +169,22 @@ const AttachmentUI: FC = () => {
       <AttachmentPrimitive.Root
         className={cn(
           "aui-attachment-root relative",
-          isImage && "aui-attachment-root-composer only:*:first:size-24",
+          isImage &&
+            `
+              aui-attachment-root-composer
+              only:*:first:size-24
+            `,
         )}
       >
         <AttachmentPreviewDialog>
           <TooltipTrigger asChild>
             <div
-              className="aui-attachment-tile size-14 cursor-pointer overflow-hidden rounded-[calc(var(--composer-radius)-var(--composer-padding))] border bg-muted transition-opacity hover:opacity-75"
+              className="
+                aui-attachment-tile size-14 cursor-pointer overflow-hidden
+                rounded-[calc(var(--composer-radius)-var(--composer-padding))]
+                border bg-muted transition-opacity
+                hover:opacity-75
+              "
               role="button"
               tabIndex={0}
               aria-label={`${typeLabel} attachment`}
@@ -176,10 +207,21 @@ const AttachmentRemove: FC = () => {
     <AttachmentPrimitive.Remove asChild>
       <TooltipIconButton
         tooltip="Remove file"
-        className="aui-attachment-tile-remove absolute end-1.5 top-1.5 size-3.5 rounded-full bg-white text-muted-foreground opacity-100 shadow-sm hover:bg-white! [&_svg]:text-black hover:[&_svg]:text-destructive"
+        className="
+          aui-attachment-tile-remove absolute inset-e-1.5 top-1.5 size-3.5
+          rounded-full bg-white text-muted-foreground opacity-100 shadow-sm
+          hover:bg-white!
+          [&_svg]:text-black
+          hover:[&_svg]:text-destructive
+        "
         side="top"
       >
-        <XIcon className="aui-attachment-remove-icon size-3 dark:stroke-[2.5px]" />
+        <XIcon
+          className="
+            aui-attachment-remove-icon size-3
+            dark:stroke-[2.5px]
+          "
+        />
       </TooltipIconButton>
     </AttachmentPrimitive.Remove>
   );
@@ -187,7 +229,12 @@ const AttachmentRemove: FC = () => {
 
 export const UserMessageAttachments: FC = () => {
   return (
-    <div className="aui-user-message-attachments-end col-span-full col-start-1 row-start-1 flex w-full flex-row justify-end gap-2">
+    <div
+      className="
+        aui-user-message-attachments-end col-span-full col-start-1 row-start-1
+        flex w-full flex-row justify-end gap-2
+      "
+    >
       <MessagePrimitive.Attachments>
         {() => <AttachmentUI />}
       </MessagePrimitive.Attachments>
@@ -197,7 +244,13 @@ export const UserMessageAttachments: FC = () => {
 
 export const ComposerAttachments: FC = () => {
   return (
-    <div className="aui-composer-attachments flex w-full flex-row items-center gap-2 overflow-x-auto empty:hidden">
+    <div
+      className="
+        aui-composer-attachments flex w-full flex-row items-center gap-2
+        overflow-x-auto
+        empty:hidden
+      "
+    >
       <ComposerPrimitive.Attachments>
         {() => <AttachmentUI />}
       </ComposerPrimitive.Attachments>
@@ -213,7 +266,13 @@ export const ComposerAddAttachment: FC = () => {
         side="bottom"
         variant="ghost"
         size="icon"
-        className="aui-composer-add-attachment size-8 rounded-full p-1 font-semibold text-xs hover:bg-muted-foreground/15 dark:border-muted-foreground/15 dark:hover:bg-muted-foreground/30"
+        className="
+          aui-composer-add-attachment size-8 rounded-full p-1 text-xs
+          font-semibold
+          hover:bg-muted-foreground/15
+          dark:border-muted-foreground/15
+          dark:hover:bg-muted-foreground/30
+        "
         aria-label="Add Attachment"
       >
         <PlusIcon className="aui-attachment-add-icon size-5 stroke-[1.5px]" />

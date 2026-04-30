@@ -35,7 +35,11 @@ const ThreadListNew: FC = () => {
     <ThreadListPrimitive.New asChild>
       <Button
         variant="outline"
-        className="aui-thread-list-new h-9 justify-start gap-2 rounded-lg px-3 text-sm hover:bg-muted data-active:bg-muted"
+        className="
+          aui-thread-list-new h-9 justify-start gap-2 rounded-lg px-3 text-sm
+          hover:bg-muted
+          data-active:bg-muted
+        "
       >
         <PlusIcon className="size-4" />
         New Thread
@@ -52,7 +56,9 @@ const ThreadListSkeleton: FC = () => {
           key={i}
           role="status"
           aria-label="Loading threads"
-          className="aui-thread-list-skeleton-wrapper flex h-9 items-center px-3"
+          className="
+            aui-thread-list-skeleton-wrapper flex h-9 items-center px-3
+          "
         >
           <Skeleton className="aui-thread-list-skeleton h-4 w-full" />
         </div>
@@ -63,8 +69,21 @@ const ThreadListSkeleton: FC = () => {
 
 const ThreadListItem: FC = () => {
   return (
-    <ThreadListItemPrimitive.Root className="aui-thread-list-item group flex h-9 items-center gap-2 rounded-lg transition-colors hover:bg-muted focus-visible:bg-muted focus-visible:outline-none data-active:bg-muted">
-      <ThreadListItemPrimitive.Trigger className="aui-thread-list-item-trigger flex h-full min-w-0 flex-1 items-center px-3 text-start text-sm">
+    <ThreadListItemPrimitive.Root
+      className="
+        aui-thread-list-item group flex h-9 items-center gap-2 rounded-lg
+        transition-colors
+        hover:bg-muted
+        focus-visible:bg-muted focus-visible:outline-none
+        data-active:bg-muted
+      "
+    >
+      <ThreadListItemPrimitive.Trigger
+        className="
+          aui-thread-list-item-trigger flex h-full min-w-0 flex-1 items-center
+          px-3 text-start text-sm
+        "
+      >
         <span className="aui-thread-list-item-title min-w-0 flex-1 truncate">
           <ThreadListItemPrimitive.Title fallback="New Chat" />
         </span>
@@ -81,7 +100,13 @@ const ThreadListItemMore: FC = () => {
         <Button
           variant="ghost"
           size="icon"
-          className="aui-thread-list-item-more me-2 size-7 p-0 opacity-0 transition-opacity group-hover:opacity-100 data-[state=open]:bg-accent data-[state=open]:opacity-100 group-data-active:opacity-100"
+          className="
+            aui-thread-list-item-more me-2 size-7 p-0 opacity-0
+            transition-opacity
+            group-hover:opacity-100
+            group-data-active:opacity-100
+            data-[state=open]:bg-accent data-[state=open]:opacity-100
+          "
         >
           <MoreHorizontalIcon className="size-4" />
           <span className="sr-only">More options</span>
@@ -90,16 +115,34 @@ const ThreadListItemMore: FC = () => {
       <ThreadListItemMorePrimitive.Content
         side="bottom"
         align="start"
-        className="aui-thread-list-item-more-content z-50 min-w-32 overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
+        className="
+          aui-thread-list-item-more-content z-50 min-w-32 overflow-hidden
+          rounded-md border bg-popover p-1 text-popover-foreground shadow-md
+        "
       >
         <ThreadListItemPrimitive.Archive asChild>
-          <ThreadListItemMorePrimitive.Item className="aui-thread-list-item-more-item flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+          <ThreadListItemMorePrimitive.Item
+            className="
+              aui-thread-list-item-more-item flex cursor-pointer items-center
+              gap-2 rounded-sm px-2 py-1.5 text-sm outline-none select-none
+              hover:bg-accent hover:text-accent-foreground
+              focus:bg-accent focus:text-accent-foreground
+            "
+          >
             <ArchiveIcon className="size-4" />
             Archive
           </ThreadListItemMorePrimitive.Item>
         </ThreadListItemPrimitive.Archive>
         <ThreadListItemPrimitive.Delete asChild>
-          <ThreadListItemMorePrimitive.Item className="aui-thread-list-item-more-item flex cursor-pointer select-none items-center gap-2 rounded-sm px-2 py-1.5 text-destructive text-sm outline-none hover:bg-destructive/10 hover:text-destructive focus:bg-destructive/10 focus:text-destructive">
+          <ThreadListItemMorePrimitive.Item
+            className="
+              aui-thread-list-item-more-item flex cursor-pointer items-center
+              gap-2 rounded-sm px-2 py-1.5 text-sm text-destructive outline-none
+              select-none
+              hover:bg-destructive/10 hover:text-destructive
+              focus:bg-destructive/10 focus:text-destructive
+            "
+          >
             <TrashIcon className="size-4" />
             Delete
           </ThreadListItemMorePrimitive.Item>
